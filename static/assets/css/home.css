@@ -4,6 +4,19 @@
 	align-items: center;
 }
 
+#pChange {
+	padding: 11px 36px 11px 15px;
+	min-width: 220px;
+	border: none;
+	border-radius: 8px;
+	background-color: var(--background-buttons);
+	color: var(--text-primary);
+	font-family: "Poppins", sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
 .title {
 	font-size: 10vh;
 	color: var(--text-primary);

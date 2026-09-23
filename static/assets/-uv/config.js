@@ -1,10 +1,10 @@
 self.__uv$config = {
-  prefix: "/a/",
+  prefix: "/uv/",
   bare: "/ov/",
   encodeUrl: Ultraviolet.codec.xor.encode,
   decodeUrl: Ultraviolet.codec.xor.decode,
-  handler: "/assets/-uv/handler.js?v=6-17-2024",
-  bundle: "/assets/-uv/bundle.js?v=6-17-2024",
-  config: "/assets/-uv/config.js?v=6-17-2024",
-  sw: "/assets/-uv/sw.js?v=6-17-2024",
+  handler: "/assets/ultraviolet/uv.handler.js",
+  bundle: "/assets/ultraviolet/uv.bundle.js",
+  config: "/assets/ultraviolet/uv.config.js",
+  sw: "/assets/ultraviolet/uv.sw.js",
 }

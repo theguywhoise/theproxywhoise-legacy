@@ -218,9 +218,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedValue === "uv") {
       localStorage.setItem("uv", "true");
       localStorage.setItem("dy", "false");
+      localStorage.setItem("proxy", "uv");
+    } else if (selectedValue === "scramjet") {
+      localStorage.setItem("uv", "false");
+      localStorage.setItem("dy", "false");
+      localStorage.setItem("proxy", "scramjet");
     } else if (selectedValue === "dy") {
       localStorage.setItem("uv", "false");
       localStorage.setItem("dy", "true");
+      localStorage.setItem("proxy", "dy");
     }
   }
 
@@ -240,6 +246,8 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.getItem("dy") === "auto"
     ) {
       pChangeElement.value = "dy";
+    } else if (localStorage.getItem("proxy") === "scramjet") {
+      pChangeElement.value = "scramjet";
     } else {
       pChangeElement.value = "uv";
     }

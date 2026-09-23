@@ -1,0 +1,4 @@
+allowBuilds:
+  '@biomejs/biome': true
+  '@mercuryworkshop/scramjet': set this to true or false
+  bufferutil: set this to true or false

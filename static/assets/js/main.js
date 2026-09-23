@@ -13,14 +13,16 @@ const nav = document.querySelector(".fixed-nav-bar");
 
 if (nav) {
   const themeId = localStorage.getItem("theme");
-  let LogoUrl = "/assets/media/favicon/main.png"; // Declare LogoUrl once
+  let LogoUrl =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1KfiyAwxuyMvPKlx48n9OFaYKqe0pKjv1Y1W2WFjDrw&s=10";
   if (themeId === "Inverted") {
-    LogoUrl = "/assets/media/favicon/main-inverted.png";
+    LogoUrl =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1KfiyAwxuyMvPKlx48n9OFaYKqe0pKjv1Y1W2WFjDrw&s=10";
   }
   const html = `
     <div class="fixed-nav-bar-container">
       <div id="icon-container">
-        <a class="icon" href="/./"><img alt="nav" id="INImg" src="${LogoUrl}"/></a>
+        <a class="icon" href="/./"><img alt="" id="INImg" src="${LogoUrl}"/></a>
       </div>
     </div>
 ;

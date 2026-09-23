@@ -1,6 +1,7 @@
-import @tomphttp/bare-server-node from "@tomphttp/bare-server-node"
 import http from "node:http";
 import path from "node:path";
+import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
+import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import { createBareServer } from "@tomphttp/bare-server-node";
 import chalk from "chalk";
 import cookieParser from "cookie-parser";
@@ -18,7 +19,29 @@ const __dirname = process.cwd();
 const server = http.createServer();
 const app = express();
 const bareServer = createBareServer("/ov/");
+const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || 8080;
+const UV_DIST = path.join(
+  __dirname,
+  "node_modules",
+  "@titaniumnetwork-dev",
+  "ultraviolet",
+  "dist",
+);
+const SCRAMJET_DIST = path.join(
+  __dirname,
+  "node_modules",
+  "@mercuryworkshop",
+  "scramjet",
+  "dist",
+);
+const LIBCURL_DIST = path.join(
+  __dirname,
+  "node_modules",
+  "@mercuryworkshop",
+  "libcurl-transport",
+  "dist",
+);
 const cache = new Map();
 const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // Cache for 30 Days
 
@@ -93,6 +116,10 @@ if (process.env.MASQR === "true") {
   setupMasqr(app);
 }
 
+app.use("/assets/ultraviolet", express.static(UV_DIST));
+app.use("/assets/scramjet", express.static(SCRAMJET_DIST));
+app.use("/assets/baremux", express.static(baremuxPath));
+app.use("/assets/libcurl", express.static(LIBCURL_DIST));
 app.use(express.static(path.join(__dirname, "static")));
 app.use("/ov", cors({ origin: true }));
 
@@ -132,7 +159,9 @@ server.on("request", (req, res) => {
 });
 
 server.on("upgrade", (req, socket, head) => {
-  if (bareServer.shouldRoute(req)) {
+  if (req.url?.startsWith("/wisp/")) {
+    wisp.routeRequest(req, socket, head);
+  } else if (bareServer.shouldRoute(req)) {
     bareServer.routeUpgrade(req, socket, head);
   } else {
     socket.end();
@@ -141,6 +170,7 @@ server.on("upgrade", (req, socket, head) => {
 
 server.on("listening", () => {
   console.log(chalk.green(`🌍 Server is running on http://localhost:${PORT}`));
+  console.log(chalk.green(`🌐 Public access is enabled on http://${HOST}:${PORT}`));
 });
 
-server.listen({ port: PORT });
+server.listen({ port: PORT, host: HOST });

@@ -171,16 +171,16 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 // Splash texts
 const SplashT = [
-  "now on vercel",
-  "Fastest growing proxy server",
-  "reMade by 11bunno11",
-  "only the necessary",
-  "Now with Zero Ads!",
-  "Thanks for using the site",
-  "Follow me on Twitter/X  (@11bunno11)",
-  "Follow me on Instagram  (11bun.no11)",
-  "Im on BlueSky too! (@11bunno11)",
-  "Check out my super cool website (https://11bunno11.neocities.org)",
+  "Do your work you bum!",
+  "pretend the website works",
+  "I SWEAR THIS WEBSITE ISN'T A VIRUS",
+  "Why is he lying?",
+  "Who starts a conversation like that i just sat down",
+  "i ran out of ideas",
+  "wow bro whoever made this website is so cool",
+  "play on thegameswhoise",
+  "I am a website, and I am here to help you",
+  "i am a robot",
 ];
 
 let SplashI = Math.floor(Math.random() * SplashT.length);

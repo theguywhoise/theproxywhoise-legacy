@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
   navigator.serviceWorker.register("../sw.js?v=6-17-2024", {
-    scope: "/a/",
+    scope: "/uv/",
   });
 });
 
@@ -28,15 +28,30 @@ function processUrl(value, path) {
     url = `https://${url}`;
   }
 
+  if (localStorage.getItem("proxy") === "scramjet") {
+    openWithScramjet(url, path);
+    return;
+  }
+
   sessionStorage.setItem("GoUrl", __uv$config.encodeUrl(url));
   const dy = localStorage.getItem("dy");
 
   if (dy === "true") {
-    window.location.href = `/a/q/${__uv$config.encodeUrl(url)}`;
+    window.location.href = `/uv/q/${__uv$config.encodeUrl(url)}`;
   } else if (path) {
     location.href = path;
   } else {
-    window.location.href = `/a/${__uv$config.encodeUrl(url)}`;
+    window.location.href = `/uv/${__uv$config.encodeUrl(url)}`;
+  }
+}
+
+async function openWithScramjet(url, path) {
+  try {
+    const target = await getScramjetUrl(url);
+    sessionStorage.setItem("GoUrl", target);
+    window.location.href = path || target;
+  } catch (error) {
+    console.error("Unable to start Scramjet:", error);
   }
 }
 
@@ -49,7 +64,7 @@ function blank(value) {
 }
 
 function dy(value) {
-  processUrl(value, `/a/q/${__uv$config.encodeUrl(value)}`);
+  processUrl(value, `/uv/q/${__uv$config.encodeUrl(value)}`);
 }
 
 function isUrl(val = "") {
